@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Form , Button, Container} from 'react-bootstrap';
 import Input from '../Input/Input';
-import Table from '../Table/Table';
 
 class FormContact extends Component {
     constructor(prop) {
@@ -11,8 +11,7 @@ class FormContact extends Component {
                 'last name': '',
                 'phone': '',
                 'email': ''
-            },
-            registeredContacts : []
+            }
         }
     }
 
@@ -21,9 +20,8 @@ class FormContact extends Component {
     }
 
     submit = () => {
+        this.props.onSubmitContact(this.state.formObj)
         this.setState({
-            registeredContacts: 
-            [...this.state.registeredContacts, this.state.formObj],
             formObj : {
                 'first name': '',
                 'last name': '',
@@ -34,18 +32,16 @@ class FormContact extends Component {
 
     render() {
         return (
-            <div>
-                <form>
+            <Container>
+                <Form>
                     {Object.entries(this.state.formObj).map(([key, value]) => 
                     <Input title = {key} value= {value} 
                     InputValue = {(e) => this.inputValue(e)} key = {key}/>)}
-                    <button onClick={(e) => { e.preventDefault();this.submit()}}>
+                    <Button onClick={(e) => { e.preventDefault();this.submit()}}>
                         submit
-                    </button>
-                </form>
-                <Table formHeader = {this.state.formObj} 
-                contacts = {this.state.registeredContacts}/>
-            </div>
+                    </Button>
+                </Form>
+            </Container>
         );
     }
 }

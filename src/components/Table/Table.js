@@ -7,7 +7,11 @@ class Table extends Component {
             <table>
                 <thead>
                     <tr>
-                        {Object.keys(this.props.formHeader).map(key => <th>{key}</th>)}
+                        {/* {Object.keys(this.props.formHeader).map(key => <th>{key}</th>)} */}
+                        <th>first name</th>
+                        <th>last name</th>
+                        <th>phone</th>
+                        <th>email</th>
                     </tr>
                 </thead>
                 <tbody>
