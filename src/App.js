@@ -16,6 +16,12 @@ class App extends Component{
     this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
   }
 
+  handleDeleteContact = (contact) => {
+    this.setState({registeredContacts: this.state.registeredContacts.filter(item => {
+      return item !== contact
+    })})
+  }
+
   render() {
     return (
       <Container className='mt-5'>
@@ -23,7 +29,8 @@ class App extends Component{
           <Col><FormContact onSubmitContact = {this.handleSubmitContact}/></Col>
         </Row>
         <Row>
-          <Col><TableContact contacts = {this.state.registeredContacts}/></Col>
+          <Col><TableContact contacts = {this.state.registeredContacts} 
+                onDeleteContact = {this.handleDeleteContact}/></Col>
         </Row>
       </Container>
     );

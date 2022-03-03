@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Contact from '../Contact/Contact';
-import { Table, Container} from 'react-bootstrap';
+import { Table, Container, Button} from 'react-bootstrap';
 
 class TableContact extends Component {
+
     render() {
         return (
             <Container className='mt-5'>
@@ -14,11 +15,23 @@ class TableContact extends Component {
                             <th>Last Name</th>
                             <th>Phone</th>
                             <th>Email</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
+                        {/* {this.props.contacts.map(contact => {
+                            <Contact itemsContact = {contact}/>
+                        })} */}
                     <tbody>
                         {this.props.contacts.map(contact =>
-                            <Contact itemsContact= {contact}/>)}
+                            <tr>
+                                {Object.values(contact).map(value => 
+                                    <td key={value}>{value}</td>)}
+                                <td>
+                                    <Button className='bg-danger' 
+                                    onClick={this.props.onDeleteContact(contact)}>Delete
+                                    </Button>
+                                </td>
+                            </tr>)}
                     </tbody>
                 </Table>
             </Container>
