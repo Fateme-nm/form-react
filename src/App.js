@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Container, Row, Col} from 'react-bootstrap'
 import FormContact from './components/FormContact/FormContact';
-import Table from './components/Table/Table';
+import TableContact from './components/TableContact/TableContact';
+import {Container, Row, Col} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component{
   constructor(prop) {
@@ -17,12 +18,12 @@ class App extends Component{
 
   render() {
     return (
-      <Container>
+      <Container className='mt-5'>
         <Row>
           <Col><FormContact onSubmitContact = {this.handleSubmitContact}/></Col>
         </Row>
         <Row>
-          <Col><Table contacts = {this.state.registeredContacts}/></Col>
+          <Col><TableContact contacts = {this.state.registeredContacts}/></Col>
         </Row>
       </Container>
     );

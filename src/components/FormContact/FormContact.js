@@ -7,10 +7,10 @@ class FormContact extends Component {
         super(prop)
         this.state = {
             formObj : {
-                'first name': '',
-                'last name': '',
-                'phone': '',
-                'email': ''
+                'First Name': '',
+                'Last Name': '',
+                'Phone': '',
+                'Email': ''
             }
         }
     }
@@ -23,16 +23,17 @@ class FormContact extends Component {
         this.props.onSubmitContact(this.state.formObj)
         this.setState({
             formObj : {
-                'first name': '',
-                'last name': '',
-                'phone': '',
-                'email': ''
+                'First Name': '',
+                'Last Name': '',
+                'Phone': '',
+                'Email': ''
             }})
     }
 
     render() {
         return (
-            <Container>
+            <Container className='mb-5 w-50'>
+                <h2 className='mb-4'>Contact registration form</h2>
                 <Form>
                     {Object.entries(this.state.formObj).map(([key, value]) => 
                     <Input title = {key} value= {value} 
