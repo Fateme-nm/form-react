@@ -12,7 +12,19 @@ class App extends Component{
     }
   }
 
+  // isValid = (contact) => {
+  //   let valid = true
+  //   Object.entries(contact).map(([key, value]) => {
+  //     switch(key) {
+
+  //     }
+  //   })
+  // }
+
   handleSubmitContact = (contact) => {
+    // if(this.isValid(contact)) {
+    //   this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
+    // }
     this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
   }
 
@@ -30,7 +42,7 @@ class App extends Component{
         </Row>
         <Row>
           <Col><TableContact contacts = {this.state.registeredContacts} 
-                onDeleteContact = {this.handleDeleteContact}/></Col>
+                  onDeleteContact = {this.handleDeleteContact}/></Col>
         </Row>
       </Container>
     );

@@ -26,11 +26,8 @@ class TableContact extends Component {
                             <tr>
                                 {Object.values(contact).map(value => 
                                     <td key={value}>{value}</td>)}
-                                <td>
-                                    <Button className='bg-danger' 
-                                    onClick={this.props.onDeleteContact(contact)}>Delete
-                                    </Button>
-                                </td>
+                                <td><Button className='bg-danger' 
+                                    onClick={() => {this.props.onDeleteContact(contact)}}>Delete</Button></td>
                             </tr>)}
                     </tbody>
                 </Table>
