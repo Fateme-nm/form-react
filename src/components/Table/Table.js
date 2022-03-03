@@ -11,7 +11,8 @@ class Table extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.contacts.map(contact =><Contact itemsContact= {contact}/>)}
+                    {this.props.contacts.map(contact =>
+                    <tr>{<Contact itemsContact= {contact}/>}</tr>)}
                 </tbody>
             </table>
         );
