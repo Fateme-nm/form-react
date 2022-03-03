@@ -21,23 +21,30 @@ class Form extends Component {
     }
 
     submit = () => {
-        this.setState({registeredContacts: 
-            [...this.state.registeredContacts, this.state.formObj]})
+        this.setState({
+            registeredContacts: 
+            [...this.state.registeredContacts, this.state.formObj],
+            formObj : {
+                'first name': '',
+                'last name': '',
+                'phone': '',
+                'email': ''
+            }})
     }
 
     render() {
         return (
             <div>
                 <form>
-                    {Object.keys(this.state.formObj).map(key => 
-                    <Input title = {key} InputValue = {(e) => this.inputValue(e)} 
-                    key = {key}/>)}
-                    <div onClick={(e)=> { e.preventDefault()
-                        this.submit()}}>
+                    {Object.entries(this.state.formObj).map(([key, value]) => 
+                    <Input title = {key} value= {value} 
+                    InputValue = {(e) => this.inputValue(e)} key = {key}/>)}
+                    <button onClick={(e) => { e.preventDefault();this.submit()}}>
                         submit
-                    </div>
+                    </button>
                 </form>
-                <Table formHeader = {this.state.formObj} contacts = {this.state.registeredContacts}/>
+                <Table formHeader = {this.state.formObj} 
+                contacts = {this.state.registeredContacts}/>
             </div>
         );
     }
