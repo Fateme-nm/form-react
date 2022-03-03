@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Input from '../Input/Input';
 import Table from '../Table/Table';
 
-class Form extends Component {
+class FormContact extends Component {
     constructor(prop) {
         super(prop)
         this.state = {
@@ -50,4 +50,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default FormContact;
