@@ -12,19 +12,11 @@ class App extends Component{
     }
   }
 
-  isValid = (contact) => {
-    let validyInfo = {
-      valid: true
-    }
-    let invalid = (key, msg) => {
-      validyInfo.valid = false
-      validyInfo.invalidItem = key
-      throw `${key} ${msg}`
-    }
+  isValid = contact => {
+    let invalid = (key, msg) => { throw `${key} ${msg}`}
     Object.entries(contact).forEach(([key, value]) => {
       if (value.length == 0) {
         invalid(key, 'is empty!')
-        validyInfo.emptyItem = true
       }
       switch(key) {
         case 'First Name': 
@@ -48,20 +40,20 @@ class App extends Component{
         }
       }
     })
-    return validyInfo
   }
 
-  handleSubmitContact = (contact) => {
+  handleSubmitContact = contact => {
     try{
       if (this.isValid(contact)) {
         this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
+        alert('Successfully registered!')
       }
     }catch(err) {
       alert(err)
     }
   }
 
-  handleDeleteContact = (contact) => {
+  handleDeleteContact = contact => {
     this.setState({registeredContacts: this.state.registeredContacts.filter(item => {
       return item !== contact
     })})
