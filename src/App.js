@@ -16,53 +16,48 @@ class App extends Component{
     let validyInfo = {
       valid: true
     }
-    let invalid = key => {
+    let invalid = (key, msg) => {
       validyInfo.valid = false
       validyInfo.invalidItem = key
+      throw `${key} ${msg}`
     }
-    Object.entries(contact).map(([key, value]) => {
-      if (value.length == 0 && !validyInfo.emptyItem) {
-        invalid(key)
+    Object.entries(contact).forEach(([key, value]) => {
+      if (value.length == 0) {
+        invalid(key, 'is empty!')
         validyInfo.emptyItem = true
       }
-    })
-    if (!validyInfo.emptyItem) {
-      Object.entries(contact).map(([key, value]) => {
-        switch(key) {
-          case 'First Name': 
-          case 'Last Name': {
-            if (value.length > 50) {
-              invalid(key)
-            }
-            break;
+      switch(key) {
+        case 'First Name': 
+        case 'Last Name': {
+          if (value.length > 50) {
+            invalid(key, 'is more than 50 characters!')
           }
-          case 'Phone': {
-            if (value.length != 11) {
-              invalid(key)
-            }
-            break;
-          }
-          case 'Email': {
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))) {
-              invalid(key)
-            }
-            break;
-          }
+          break;
         }
-      })
-    }
+        case 'Phone': {
+          if (value.length != 11) {
+            invalid('Phone number', 'must be 11 digits!')
+          }
+          break;
+        }
+        case 'Email': {
+          if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))) {
+            invalid(key, 'is not valid!')
+          }
+          break;
+        }
+      }
+    })
     return validyInfo
   }
 
   handleSubmitContact = (contact) => {
-    if (this.isValid(contact).valid) {
-      this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
-    }
-    else if (this.isValid(contact).emptyItem) {
-      alert(`${this.isValid(contact).invalidItem} is empty!`)
-    }
-    else {
-      alert(`${this.isValid(contact).invalidItem} is not valid!`)
+    try{
+      if (this.isValid(contact)) {
+        this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
+      }
+    }catch(err) {
+      alert(err)
     }
   }
 
