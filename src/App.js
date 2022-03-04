@@ -12,7 +12,7 @@ class App extends Component{
     }
   }
 
-  isValid = contact => {
+  isValid = (contact, submitContact) => {
     let invalid = (key, msg) => { throw `${key} ${msg}`}
     Object.entries(contact).forEach(([key, value]) => {
       if (value.length == 0) {
@@ -36,21 +36,24 @@ class App extends Component{
           if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))) {
             invalid(key, 'is not valid!')
           }
-          break;
         }
       }
     })
+    submitContact()
   }
 
   handleSubmitContact = contact => {
+    let submited = true
     try{
-      if (this.isValid(contact)) {
+      this.isValid(contact, () => {
         this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
         alert('Successfully registered!')
-      }
+      })
     }catch(err) {
       alert(err)
+      submited = false
     }
+    return submited
   }
 
   handleDeleteContact = contact => {

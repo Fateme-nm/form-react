@@ -21,14 +21,16 @@ class FormContact extends Component {
 
     submit = (e) => {
         e.preventDefault()
-        this.props.onSubmitContact(this.state.formObj)
-        this.setState({
-            formObj : {
-                'First Name': '',
-                'Last Name': '',
-                'Phone': '',
-                'Email': ''
-            }})   
+        let submited = this.props.onSubmitContact(this.state.formObj)
+        if (submited) {
+            this.setState({
+                formObj : {
+                    'First Name': '',
+                    'Last Name': '',
+                    'Phone': '',
+                    'Email': ''
+                }})
+        }   
     }
 
     render() {
