@@ -12,20 +12,58 @@ class App extends Component{
     }
   }
 
-  // isValid = (contact) => {
-  //   let valid = true
-  //   Object.entries(contact).map(([key, value]) => {
-  //     switch(key) {
-
-  //     }
-  //   })
-  // }
+  isValid = (contact) => {
+    let validyInfo = {
+      valid: true
+    }
+    let invalid = key => {
+      validyInfo.valid = false
+      validyInfo.invalidItem = key
+    }
+    Object.entries(contact).map(([key, value]) => {
+      if (value.length == 0 && !validyInfo.emptyItem) {
+        invalid(key)
+        validyInfo.emptyItem = true
+      }
+    })
+    if (!validyInfo.emptyItem) {
+      Object.entries(contact).map(([key, value]) => {
+        switch(key) {
+          case 'First Name': 
+          case 'Last Name': {
+            if (value.length > 50) {
+              invalid(key)
+            }
+            break;
+          }
+          case 'Phone': {
+            if (value.length != 11) {
+              invalid(key)
+            }
+            break;
+          }
+          case 'Email': {
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))) {
+              invalid(key)
+            }
+            break;
+          }
+        }
+      })
+    }
+    return validyInfo
+  }
 
   handleSubmitContact = (contact) => {
-    // if(this.isValid(contact)) {
-    //   this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
-    // }
-    this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
+    if (this.isValid(contact).valid) {
+      this.setState({registeredContacts: [...this.state.registeredContacts, contact]})
+    }
+    else if (this.isValid(contact).emptyItem) {
+      alert(`${this.isValid(contact).invalidItem} is empty!`)
+    }
+    else {
+      alert(`${this.isValid(contact).invalidItem} is not valid!`)
+    }
   }
 
   handleDeleteContact = (contact) => {
