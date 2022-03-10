@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormContact from './components/FormContact/FormContact';
 import TableContact from './components/TableContact/TableContact';
+import Clock from './components/Clock/Clock';
 import {Container, Row, Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -64,7 +65,10 @@ class App extends Component{
 
   render() {
     return (
-      <Container className='mt-5'>
+      <Container className='mt-4'>
+        <Row>
+          <Col className='d-flex justify-content-center mb-4'><Clock /></Col>
+        </Row>
         <Row>
           <Col><FormContact onSubmitContact = {this.handleSubmitContact}/></Col>
         </Row>
