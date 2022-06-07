@@ -34,6 +34,7 @@ class FormContact extends Component {
     }
 
     render() {
+        
         return (
             <Container className='mb-5 w-50 bg-light py-4 px-5'>
                 <h2 className='mb-4'>Contact form</h2>
